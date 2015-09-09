@@ -45,17 +45,17 @@ public class Assignment2 {
 		 }
 		}
 		
-        else if(option1==2){
+                    else if(option1==2){
         	FoodItem  [] newluncharray=Assignment2.select1(luncharray);
 	        for(int i=0;i<newluncharray.length;i++){
 	        System.out.printf("%15s%15s%15s%15s\n",newluncharray[i].get_name(),newluncharray[i].get_price(),newluncharray[i].get_calorie(),newluncharray[i].get_fat());			
 		 } 
-    }
+                }
     
 		    else if(option1==3){
-			   FoodItem  [] newluncharray=Assignment2.select2(luncharray);
-	       for(int i=0;i<newluncharray.length;i++){
-	       System.out.printf("%15s%15s%15s%15s\n",newluncharray[i].get_name(),newluncharray[i].get_price(),newluncharray[i].get_calorie(),newluncharray[i].get_fat());									
+	         FoodItem  [] newluncharray=Assignment2.select2(luncharray);
+	         for(int i=0;i<newluncharray.length;i++){
+	         System.out.printf("%15s%15s%15s%15s\n",newluncharray[i].get_name(),newluncharray[i].get_price(),newluncharray[i].get_calorie(),newluncharray[i].get_fat());									
 		 }
 		}
 		
@@ -64,14 +64,14 @@ public class Assignment2 {
 		} 
 		
 		    System.out.println("Do you want to try again? (Enter anything to try again, enter No to continue：");
-	      answer=console.next();
-	      if(answer.equals("No"))
-	      break;
-	  }while(true);
-        do{
+	         answer=console.next();
+	         if(answer.equals("No"))
+	         break;
+	        }while(true);
+              do{
+		System.out.println("What food are you looking for? ");
 		String p;
 		Scanner console1 = new Scanner(System.in);
-		System.out.println("What food are you looking for? ");
 		p = console.next();
 		console.nextLine();
 		 int index = binarySearch(luncharray, p);
@@ -158,7 +158,6 @@ public class Assignment2 {
 	 }
        
         public static FoodItem[] select(FoodItem[]luncharray){
-        	 
         	  for (int i = 0; i < luncharray.length; i++) {   
         	   for (int j =i; j < luncharray.length; j++) {
         	    int  intTemp= luncharray[i].get_name().compareToIgnoreCase(luncharray[j].get_name());
