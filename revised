@@ -27,9 +27,9 @@ public class Assignment2 {
 		FoodItem taco = new FoodItem("Taco", 2.5, 500,200,0);
 		FoodItem pizza = new FoodItem("Pizza", 4.5, 130,230,0);
 		FoodItem sandwich = new FoodItem("Sandwich", 3.5, 600,100,0);
-	  FoodItem coke =new FoodItem("Coke",1.0,300,270,0);
-	  FoodItem tea =new FoodItem("Tea",5.0,1000,10,0);
-	  FoodItem water =new FoodItem("Water",2.0,0,0,0);
+	        FoodItem coke =new FoodItem("Coke",1.0,300,270,0);
+	        FoodItem tea =new FoodItem("Tea",5.0,1000,10,0);
+	        FoodItem water =new FoodItem("Water",2.0,0,0,0);
 		FoodItem[]luncharray ={burger, taco, sandwich, hotdog, pizza,coke,tea, water};
 		int option1=0;
 		do{
