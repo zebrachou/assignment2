@@ -1,0 +1,213 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+public class Assignment2 {
+	public static void main(String[] args)throws FileNotFoundException{
+        File inputFile = new File("C:/cs121/project2_zhou_input.txt");
+		Scanner my_input = new Scanner(inputFile);
+		String name;
+		double price=0;
+		double calorie=0;
+	    double fat=0;
+			while(my_input.hasNextLine()){	
+				name = my_input.next();
+				price = Double.parseDouble(my_input.next());
+				calorie = Double.parseDouble(my_input.next());
+				fat = Double.parseDouble(my_input.next());
+				System.out.printf("%15s%15s%15s%15s\n", name, price,calorie,fat);
+		}
+		my_input.close();
+		int quantity = 0;
+		String answer="No";
+		Scanner console = new Scanner(System.in);	
+		FoodItem burger = new FoodItem("Burger", 3.0,200, 100, 0);
+		FoodItem hotdog = new FoodItem("Hot dog", 1.5, 350,120,0);
+		FoodItem taco = new FoodItem("Taco", 2.5, 500,200,0);
+		FoodItem pizza = new FoodItem("Pizza", 4.5, 130,230,0);
+		FoodItem sandwich = new FoodItem("Sandwich", 3.5, 600,100,0);
+	    FoodItem coke =new FoodItem("Coke",1.0,300,270,0);
+	    FoodItem tea =new FoodItem("Tea",5.0,1000,10,0);
+	    FoodItem water =new FoodItem("Water",2.0,0,0,0);
+		FoodItem[]luncharray ={burger, taco, sandwich, hotdog, pizza,coke,tea, water};
+		int option1=0;
+		do{
+		System.out.println("enter 1 for name:");
+		System.out.println("enter 2 for calorie:");
+		System.out.println("enter 3 for price:");
+	    Scanner console1 = new Scanner(System.in);
+		option1 = console1.nextInt();
+		if(option1==1){
+			FoodItem  [] newluncharray=Assignment2.select(luncharray);
+	        for(int i=0;i<newluncharray.length;i++){
+	        System.out.printf("%15s%15s%15s%15s\n",newluncharray[i].get_name(),newluncharray[i].get_price(),newluncharray[i].get_calorie(),newluncharray[i].get_fat());	
+		}
+		}
+        else if(option1==2){
+        	FoodItem  [] newluncharray=Assignment2.select1(luncharray);
+	        for(int i=0;i<newluncharray.length;i++){
+	        System.out.printf("%15s%15s%15s%15s\n",newluncharray[i].get_name(),newluncharray[i].get_price(),newluncharray[i].get_calorie(),newluncharray[i].get_fat());			
+		} 
+        }
+		else if(option1==3){
+			FoodItem  [] newluncharray=Assignment2.select2(luncharray);
+	        for(int i=0;i<newluncharray.length;i++){
+	        System.out.printf("%15s%15s%15s%15s\n",newluncharray[i].get_name(),newluncharray[i].get_price(),newluncharray[i].get_calorie(),newluncharray[i].get_fat());									
+		}
+		}
+		else{
+		System.out.println("sorry");
+		}
+		System.out.println("Do you want to try again? (Enter anything to try again, enter No to continue：");
+	    answer=console.next();
+	    if(answer.equals("No"))
+	     break;
+	   }while(true);
+        do{
+		String p;
+		Scanner console1 = new Scanner(System.in);
+		System.out.println("What food are you looking for? ");
+		p = console.next();
+		console.nextLine();
+		 int index = binarySearch(luncharray, p);
+	        if (index > -1) {
+	        	if (p.equals("burger")){
+					System.out.println("How many Burger do you need? ");
+					quantity = console.nextInt();
+					burger.update_quantity(quantity);
+				}
+				else if (p.equals("taco")){
+					System.out.println("How many Tacos do you need? ");
+					quantity = console.nextInt();
+					taco.update_quantity(quantity);
+					
+				}
+				else if (p.equals("sandwich")){
+					System.out.println("How many sandwiches do you need? ");
+					quantity = console.nextInt();
+					sandwich.update_quantity(quantity);				
+				}
+				else if (p.equals("hotdog")){
+					System.out.println("How many hot dog do you need? ");
+					quantity = console.nextInt();
+					hotdog.update_quantity(quantity);		
+				}
+				else if (p.equals("pizza")){
+					System.out.println("How many pizza do you need? ");
+					quantity = console.nextInt();
+					pizza.update_quantity(quantity);	
+				}
+				else if (p.equals("coke")){
+					System.out.println("How many Coke do you need? ");
+					quantity = console.nextInt();
+					coke.update_quantity(quantity);	
+				}
+				else if (p.equals("tea")){
+					System.out.println("How many Tea do you need? ");
+					quantity = console.nextInt();
+					tea.update_quantity(quantity);	
+				}
+				else if(p.equals("water")){
+					System.out.println("How many Water do you need? ");
+					quantity = console.nextInt();
+					water.update_quantity(quantity);	
+				}
+				else {
+					System.out.println("Sorry, we do not have it.");
+				}
+	        }
+	        System.out.println();
+	    	System.out.println("Do you want anything else? (Enter anything to try again, enter No to continue：");
+		    answer=console.next();
+		    if(answer.equals("No"))
+		     break;
+        }while(true);
+		double total = 0;
+		total = total + burger.sub_total() + taco.sub_total() + sandwich.sub_total()+ hotdog.sub_total()+pizza.sub_total()+coke.sub_total()+tea.sub_total()+water.sub_total();
+		System.out.println();
+		System.out.printf("%15s%15s%15s%15s\n", "Items", "Price", "Quantity", "Sub_total");
+		System.out.println("-------------------------------------------------------------");
+		for (int i = 0; i< luncharray.length; i++){
+		System.out.printf("%15s%15.2f%15d%15.2f\n", luncharray[i].get_name(), luncharray[i].get_price(), luncharray[i].get_quantity(), luncharray[i].get_price()*luncharray[i].get_quantity());
+		}	
+		System.out.println("-------------------------------------------------------------");
+		System.out.println("Total charge is $" + total + ".");
+		
+		File outputFile = new File("C:/cs121/lunch_receipt.txt");
+		PrintWriter my_output = new PrintWriter(outputFile);
+		my_output.printf("%15s%15s%15s%15s\n", "Items", "Price", "Quantity", "Sub_total");
+		my_output.println("-------------------------------------------------------------");
+		for (int i = 0; i< luncharray.length; i++)
+		my_output.printf("%15s%15.2f%15d%15.2f\n", luncharray[i].get_name(), luncharray[i].get_price(), luncharray[i].get_quantity(), luncharray[i].get_price()*luncharray[i].get_quantity());
+		
+		my_output.println("-------------------------------------------------------------");
+		my_output.println("Total charge is $" + total + ".");
+		my_output.close();		
+		
+		
+	    }
+       
+        public static FoodItem[] select(FoodItem[]luncharray){
+        	 
+        	  for (int i = 0; i < luncharray.length; i++) {   
+        	   for (int j =i; j < luncharray.length; j++) {
+        	    int  intTemp= luncharray[i].get_name().compareToIgnoreCase(luncharray[j].get_name());
+        	    FoodItem Temp =null;
+        	    if(intTemp>0){
+        	     Temp = luncharray[j];
+        	     luncharray[j] = luncharray[i];
+        	     luncharray[i] = Temp;
+        	    }
+        	   }
+        	  }  
+        	
+        	  return luncharray;
+        	 }
+        public static  FoodItem[] select1(FoodItem[]luncharray){
+        for(int i=0;i< luncharray.length-1;i++){
+ 	    int x=i;
+ 	    for(int j=i+1;j<luncharray.length;j++){
+ 	          x=j;
+ 	    FoodItem temp;
+ 	    if(luncharray[i].get_calorie()>luncharray[x].get_calorie()){
+ 		   temp=luncharray[i];
+ 		  luncharray[i]=luncharray[x];
+ 		 luncharray[x]=temp;
+ 	    }
+ 	   
+ 	    }
+        }
+	    return luncharray;
+
+        }
+        public static  FoodItem[] select2(FoodItem[]luncharray){
+        for(int i=0;i< luncharray.length-1;i++){
+        	int x=i;
+        	for(int j=i+1;j<luncharray.length;j++){
+        		x=j;
+        		FoodItem temp;
+ 	    if(luncharray[i].get_price()>luncharray[x].get_price()){
+ 		   temp=luncharray[i];
+ 		   luncharray[i]=luncharray[x];
+ 		   luncharray[x]=temp;
+ 	    }
+ 	    }
+        }
+	    return luncharray;
+        }
+        static int binarySearch(FoodItem[] luncharray, String p) {
+            int min = 0;
+            int max = luncharray.length - 1;
+            while (max >= min) {
+                int mid = (max + min) / 2;
+                if (luncharray[mid].compareToIgnoreCase(p) == 0)
+                    return mid;
+                else if (luncharray[mid].compareToIgnoreCase(p) < 0)
+                    min = mid + 1;
+                else
+                    max = mid - 1;
+            }
+            return -1;
+        }
+     
+}
