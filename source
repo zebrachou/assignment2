@@ -17,6 +17,10 @@ public class Assignment2 {
 				fat = Double.parseDouble(my_input.next());
 				System.out.printf("%15s%15s%15s%15s\n", name, price,calorie,fat);
 		}
+		 String p;
+		Scanner console1 = new Scanner(System.in);
+		p = console.next();
+		console.nextLine();
 		my_input.close();
 		int quantity = 0;
 		String answer="No";
@@ -64,11 +68,7 @@ public class Assignment2 {
 	     break;
 	   }while(true);
         do{
-		String p;
-		Scanner console1 = new Scanner(System.in);
 		System.out.println("What food are you looking for? ");
-		p = console.next();
-		console.nextLine();
 		 int index = binarySearch(luncharray, p);
 	        if (index > -1) {
 	        	if (p.equals("burger")){
